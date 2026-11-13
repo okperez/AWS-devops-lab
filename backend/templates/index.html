@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DevOps Demo App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  </head>
+  <body>
+    <main class="container">
+      <section class="card">
+        <p class="eyebrow">Projet AWS & DevOps</p>
+        <h1>Application de démonstration</h1>
+        <p>
+          Cette application sert de base pour un projet Cloud/DevOps afin de montrer
+          les bonnes pratiques de sécurisation, d'automatisation et de déploiement.
+        </p>
+
+        <div class="status-grid">
+          <div class="status-item">
+            <span class="label">État</span>
+            <strong id="status">Chargement...</strong>
+          </div>
+          <div class="status-item">
+            <span class="label">Service</span>
+            <strong>AWS DevOps Demo</strong>
+          </div>
+        </div>
+
+        <button id="refresh-button">Vérifier le service</button>
+      </section>
+    </main>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+  </body>
+</html>
