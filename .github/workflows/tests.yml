@@ -37,4 +37,5 @@ jobs:
         working-directory: terraform
         env:
           TF_VAR_ssh_ingress_cidr: ${{ vars.SSH_INGRESS_CIDR }}
+          TF_VAR_ssh_public_key: ${{ vars.SSH_PUBLIC_KEY }}
         run: terraform plan -input=false
