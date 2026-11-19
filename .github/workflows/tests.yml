@@ -1,6 +1,8 @@
 name: test workflow
 on:
   push:
+    branches:
+      - main
 permissions:
     contents: read
     id-token: write
@@ -12,10 +14,10 @@ jobs:
         - name: Checkout repository
           uses: actions/checkout@v4
         - name: Configure AWS credentials
-          uses: aws-actions/configure-aws-credentials@v2
+          uses: aws-actions/configure-aws-credentials@v6.3.0
           with:
             role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
             aws-region: eu-west-3
-        - name: echo "get-caller-identity"
+        - name: echo "Check AWS identity"
           run: aws sts get-caller-identity
 
