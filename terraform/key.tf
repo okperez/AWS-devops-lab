@@ -1,4 +1,4 @@
-resource "aws_key_pair" "my_key" {
+resource "aws_key_pair" "ssh_public_key" {
   key_name   = "my_key"
-  public_key = file(pathexpand("~/.ssh/devops_pro.pub"))
+  public_key = var.ssh_public_key
 }
