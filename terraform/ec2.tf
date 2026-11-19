@@ -16,7 +16,7 @@ resource "aws_instance" "bastion" {
   instance_type          = "t2.micro"
   subnet_id              = aws_subnet.public1.id
   vpc_security_group_ids = [aws_security_group.bastion_sg.id]
-  key_name               = aws_key_pair.my_key.key_name
+  key_name               = aws_key_pair.ssh_public_key.key_name
 
   metadata_options {
     http_endpoint = "enabled"
@@ -38,7 +38,7 @@ resource "aws_instance" "ec2_private" {
   instance_type          = "t2.micro"
   subnet_id              = aws_subnet.private.id
   vpc_security_group_ids = [aws_security_group.ec2_sg.id]
-  key_name               = aws_key_pair.my_key.key_name
+  key_name               = aws_key_pair.ssh_public_key.key_name
   iam_instance_profile   = aws_iam_instance_profile.ecr_instance_profile.name
   user_data              = file("${path.module}/user_data.sh")
   metadata_options {
