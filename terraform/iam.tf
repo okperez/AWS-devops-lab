@@ -3,9 +3,6 @@ resource "aws_iam_role" "ecr_role" {
 
   assume_role_policy = data.aws_iam_policy_document.assume_role.json
 
-  tags = {
-    tag-key = "tag-value"
-  }
 }
 
 resource "aws_iam_instance_profile" "ecr_instance_profile" {
