@@ -6,7 +6,7 @@ on:
 permissions:
   contents: read
   id-token: write
-  
+
 
 jobs:
   test:
@@ -19,9 +19,11 @@ jobs:
         uses: hashicorp/setup-terraform@v4
         with:
           terraform_version: "1.16.4"
-
-      - name: Check Terraform installation
-        run: terraform version
+      - name: Check Terraform plan
+        working-directory: terraform
+        env:
+          TF_VAR_ssh_ingress_cidr: ${{ vars.SSH_INGRESS_CIDR }}
+        run: terraform plan -input=false
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v6.3.0
