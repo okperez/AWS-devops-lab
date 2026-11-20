@@ -1,8 +1,13 @@
-name: test workflow
+name: Apply workflow
 on:
   push:
     branches:
       - main
+      
+concurrency:
+  group: Workflow - main
+  cancel-in-progress: false
+
 permissions:
   contents: read
   id-token: write
@@ -26,16 +31,13 @@ jobs:
           role-to-assume: ${{ vars.AWS_ROLE_ARN }}
           aws-region: eu-west-3
 
-      - name: Check AWS identity
-        run: aws sts get-caller-identity
-
       - name: Initialize Terraform backend
         working-directory: terraform
         run: terraform init -input=false
 
-      - name: Check Terraform plan
+      - name: Check Terraform apply
         working-directory: terraform
         env:
           TF_VAR_ssh_ingress_cidr: ${{ vars.SSH_INGRESS_CIDR }}
           TF_VAR_ssh_public_key: ${{ vars.SSH_PUBLIC_KEY }}
-        run: terraform plan -input=false
+        run: terraform apply -auto-approve
