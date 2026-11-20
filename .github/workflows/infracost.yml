@@ -1,11 +1,20 @@
 name: Infracost
-on:
-  push:
-    branches:
-      - main
+on: [pull_request]
 
-jobs:
-  infracost:
+jobs: 
+  infracost_breakdown:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Infracost breakdown
+        uses: infracost/actions/setup@v3
+        env:
+          INFRACOST_API_AUTHENTICATION_TOKEN: ${{ secrets.INFRACOST_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          path: terraform
+
+  infracost_diff:
     runs-on: ubuntu-latest
     container: ghcr.io/infracost/ci:2
     permissions:
