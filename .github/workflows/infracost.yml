@@ -25,5 +25,5 @@ jobs:
           # SHA and author are not the contributor's.
           ref: ${{ github.event.pull_request.head.sha }}
           path: head
-      - run: infracost-ci scan --path head/terraform
+      - run: infracost-ci breakdown --base-path base --head-path head
       - run: infracost-ci diff --base-path base --head-path head
