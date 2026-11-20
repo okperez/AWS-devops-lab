@@ -140,6 +140,7 @@ data "aws_iam_policy_document" "GitHub_OIDC_policy_actions_list" {
       "iam:getrole",
       "iam:listattachedrolepolicies",
       "iam:listinstanceprofilesforrole",
+      "iam:ListRolePolicies"
     ]
     resources = [
       local.app_role_arn
