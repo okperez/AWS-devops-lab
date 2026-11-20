@@ -1,8 +1,6 @@
 name: Infracost
 on:
-  push:
-    branches:
-      - main
+  pull_request:
 
 jobs:
   infracost:
@@ -27,4 +25,5 @@ jobs:
           # SHA and author are not the contributor's.
           ref: ${{ github.event.pull_request.head.sha }}
           path: head
+      - run: infracost scan
       - run: infracost-ci diff --base-path base --head-path head
