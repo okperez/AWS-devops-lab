@@ -1,6 +1,6 @@
 name: Infracost
-on:
-  pull_request:
+on: [pull_request]
+
 
 jobs:
   infracost:
@@ -25,5 +25,5 @@ jobs:
           # SHA and author are not the contributor's.
           ref: ${{ github.event.pull_request.head.sha }}
           path: head
-      - run: infracost scan
+      - run: infracost-ci scan --path head/terraform
       - run: infracost-ci diff --base-path base --head-path head
