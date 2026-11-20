@@ -140,7 +140,9 @@ data "aws_iam_policy_document" "GitHub_OIDC_policy_actions_list" {
       "iam:getrole",
       "iam:listattachedrolepolicies",
       "iam:listinstanceprofilesforrole",
-      "iam:ListRolePolicies"
+      "iam:ListRolePolicies",
+      "iam:TagRole",
+      "iam:UntagRole"
     ]
     resources = [
       local.app_role_arn
@@ -154,6 +156,8 @@ data "aws_iam_policy_document" "GitHub_OIDC_policy_actions_list" {
       "iam:getinstanceprofile",
       "iam:addroletoinstanceprofile",
       "iam:removerolefrominstanceprofile",
+      "iam:TagInstanceProfile",
+      "iam:UntagInstanceProfile"
     ]
     resources = [
     local.app_instance_profile_arn]
@@ -169,6 +173,8 @@ data "aws_iam_policy_document" "GitHub_OIDC_policy_actions_list" {
       "iam:createpolicyversion",
       "iam:deletepolicyversion",
       "iam:setdefaultpolicyversion",
+      "iam:tagpolicy",
+      "iam:untagpolicy"
     ]
     resources = [
       local.app_ecr_policy_arn
