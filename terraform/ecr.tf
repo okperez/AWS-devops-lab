@@ -1,5 +1,5 @@
 resource "aws_ecr_repository" "image_repo" {
-  name = "image-repo"
+  name         = "image-repo"
   force_delete = true
 }
 

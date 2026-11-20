@@ -11,17 +11,18 @@ provider "aws" {
   region = "eu-west-3"
   default_tags {
     tags = {
-      Environment = "dev"
+      Environment = "Dev"
       Name        = "okperez"
+      Service     = "aws-devops-lab"
     }
   }
 }
 
 terraform {
   backend "s3" {
-    bucket = "terraform-state-storage-2026"
-    key    = "terraform/terraform.tfstate"
-    region = "eu-west-3"
+    bucket       = "terraform-state-storage-2026"
+    key          = "terraform/terraform.tfstate"
+    region       = "eu-west-3"
     use_lockfile = true
   }
 }
