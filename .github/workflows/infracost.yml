@@ -1,9 +1,20 @@
 name: Infracost
 on: [pull_request]
 
+jobs: 
+  infracost_breakdown:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Infracost breakdown
+        uses: infracost/infracost-gh-action@v2
+        env:
+          INFRACOST_API_AUTHENTICATION_TOKEN: ${{ secrets.INFRACOST_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          path: terraform
 
-jobs:
-  infracost:
+  infracost_diff:
     runs-on: ubuntu-latest
     container: ghcr.io/infracost/ci:2
     permissions:
@@ -25,5 +36,4 @@ jobs:
           # SHA and author are not the contributor's.
           ref: ${{ github.event.pull_request.head.sha }}
           path: head
-      - run: infracost-ci breakdown --base-path base --head-path head
       - run: infracost-ci diff --base-path base --head-path head
