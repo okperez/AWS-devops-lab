@@ -6,13 +6,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Infracost breakdown
-        uses: infracost/actions/setup@v3
+      - uses: infracost/actions/setup@v3
+        with:
+          api-key: ${{ secrets.INFRACOST_API_KEY }}
+
+      - run: infracost breakdown --path terraform
         env:
           INFRACOST_API_AUTHENTICATION_TOKEN: ${{ secrets.INFRACOST_API_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          path: terraform
 
   infracost_diff:
     runs-on: ubuntu-latest
